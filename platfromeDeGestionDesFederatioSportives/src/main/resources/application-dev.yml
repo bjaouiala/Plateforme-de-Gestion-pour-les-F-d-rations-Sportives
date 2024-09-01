@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    username: ala
+    password: ala
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/gestion_des_federation
+  application:
+    name: platfromeDeGestionDesFederatioSportives
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port:
+
+application:
+  security:
+    jwt:
+      secret-key: yhwdxGYjqMr3qRBFFxF3l7si5Q9PfetGI1TD0t4sl06ksSdvyhgLss8YL066tJsZ
+      expiration : 8640000
+
+
