@@ -13,14 +13,30 @@ services:
       - 5432:5432
     networks:
       - app-network
+  pgadmin:
+    container_name: ms-pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - 5051:80
+    networks:
+      - app-network
+    restart: unless-stopped
+
 
   java-mailer:
-    container_name: java-mailer-platform-sportive
+    container_name: mailer
     image: maildev/maildev
     ports:
-      - 1080:1080
-      - 1025:1025
-    restart: unless-stopped
+      - 127.0.0.1:1080:1080
+      - 127.0.0.1:1025:1025
+    network_mode: bridge
+    restart: no
 
 
 networks:
@@ -30,3 +46,5 @@ networks:
 volumes:
   postgres:
     driver: local
+  pgadmin:
+

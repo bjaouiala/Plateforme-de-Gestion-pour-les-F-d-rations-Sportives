@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          <span class="fs-5 d-none d-sm-inline">Menu</span>
+        </a>
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+          <li class="nav-item">
+            <a routerLink="/admin" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" (click)="toggleDashboard()" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+              <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+            <ul  [@submenuAnimation]="isDashboardExpanded ? 'expanded' : 'collapsed'"  class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+              <li class="w-100" >
+                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline subItem" >Overview</span> </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline subItem" >Statistics</span> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" (click)="toggleClub()" class="nav-link px-0 align-middle">
+              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Manage Clubs</span></a>
+            <ul  [@submenuAnimation]="isClubsExpanded ? 'expanded' : 'collapsed'"  class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+              <li class="w-100" >
+                <a routerLink="manage-club" class="nav-link px-0"> <span class="d-none d-sm-inline subItem"  >Add Club</span> </a>
+              </li>
+              <li>
+                <a routerLink="/admin" class="nav-link px-0"> <span class="d-none d-sm-inline subItem" >All Clubs</span> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" (click)="toggleLicense()" class="nav-link px-0 align-middle">
+              <i class="fs-4 bi-card-list"></i> <span class="ms-1 d-none d-sm-inline">Manage Club Admin</span></a>
+            <ul  [@submenuAnimation]="isLicensesExpanded ? 'expanded' : 'collapsed'" class="collapse show nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+              <li class="w-100" >
+                <a routerLink="manage-admin-club" class="nav-link px-0"> <span class="d-none d-sm-inline subItem" >Add Club Admin</span> </a>
+              </li>
+              <li>
+                <a routerLink="admin-club" class="nav-link px-0"> <span class="d-none d-sm-inline subItem">All Club Admin</span> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" (click)="toggleEvent()" class="nav-link px-0 align-middle">
+              <i class="fs-4 bi-calendar-event"></i> <span class="ms-1 d-none d-sm-inline">Events</span></a>
+            <ul [@submenuAnimation]="isEventsExpanded ? 'expanded' : 'collapsed'" class="collapse show nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="manage-event" class="nav-link px-0"> <span class="d-none d-sm-inline subItem">Add Event</span></a>
+              </li>
+              <li>
+                <a routerLink="all-Event" class="nav-link px-0"> <span class="d-none d-sm-inline subItem" >All Events</span></a>
+              </li>
+            </ul>
+          </li>
+<!--          <li>-->
+<!--            <a href="#" class="nav-link px-0 align-middle">-->
+<!--              <i class="fs-4 bi-graph-up"></i> <span class="ms-1 d-none d-sm-inline">Reports</span> </a>-->
+<!--          </li>-->
+
+        </ul>
+        <hr>
+        <div class="dropdown pb-5">
+          <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+             id="dropdownUser1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+            <span class="d-none d-sm-inline mx-1">Admin</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" style="cursor: pointer" (click)="logout()">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

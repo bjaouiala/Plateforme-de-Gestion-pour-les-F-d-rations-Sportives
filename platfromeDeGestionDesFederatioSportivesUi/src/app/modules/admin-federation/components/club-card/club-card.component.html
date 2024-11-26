@@ -1,0 +1,27 @@
+<div class="card border-2" style="width:20rem">
+<!--  <div (click)="onRemoveItem()" *ngIf="remove" title="remove club from waiting List" class="d-flex justify-content-end"><i class="fas fa-remove"></i></div>-->
+  <img [src]="clubPicture" class="card-img-top" alt="..." >
+  <div class="card-body overflow-scroll">
+    <h5 class="card-title fs-6 text-nowrap fw-bold mb-1" > <i class=" fa-solid fa-club"></i>&nbsp;{{club.name}}</h5>
+    <h5 class="card-subtitle fs-6 text-secondary fw-bold mb-1"> <i class=" fa-solid fa-user-check">&nbsp;</i>{{club.address}}</h5>
+    <h6 class="card-subtitle fs-6 text-secondary fw-bold mb-1"><i class="fas fa-code"></i> {{club.phoneNumber}}</h6>
+    <h6 class="card-subtitle fs-6 text-secondary fw-bold "><i class="fa-solid fa-user-check"></i> {{club.email}}</h6>
+    <hr>
+    <p class="card-text">{{club.description}}</p>
+  </div>
+  <div class="card-footer d-flex gap-2 justify-content-between align-items-center">
+    <div class="d-flex gap-2">
+      <app-rating [rating]="club.rate || 0"></app-rating>
+      <span class="fw-bold" *ngIf="club.rate||0 > 0">
+          {{club.rate}}
+        </span>
+    </div>
+    <div class="d-flex gap-2">
+      <i (click)="onShowDetails()" class="fas fa-circle-info text-primary" title="Show club details"></i>
+      <i (click)="onEdit()" class="fas fa-edit text-success" title="Edit Club"></i>
+    </div>
+
+  </div>
+
+
+</div>

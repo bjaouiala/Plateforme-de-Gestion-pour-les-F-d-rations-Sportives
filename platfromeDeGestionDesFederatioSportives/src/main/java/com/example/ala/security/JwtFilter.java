@@ -4,7 +4,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,9 +22,10 @@ import java.security.Security;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
-    final JwtService jwtService;
-    final UserDetailsService userDetailsService;
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
 
 
     @Override
@@ -51,10 +54,12 @@ public class JwtFilter extends OncePerRequestFilter {
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
 
+
             }
         }filterChain.doFilter(request,response);
 
 
 
     }
+
 }

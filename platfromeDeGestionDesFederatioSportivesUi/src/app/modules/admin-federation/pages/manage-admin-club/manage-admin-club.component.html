@@ -1,0 +1,72 @@
+<div class="p-2">
+    <h2>Manage Admin Clubs</h2>
+    <hr>
+    <div class="d-flex gap-2">
+      <div class="col-3">
+        <img class="rounded-1" width="100%" height="80%" [src]="selectedPicture" alt="...">
+        <div class="mt-2"></div>
+        <input (change)="onFileSelected($event)"
+               class="form-control"
+               type="file"
+               id="formFile"
+               accept="image/*">
+      </div>
+      <div class="col-9">
+        <form class="row g-3" [formGroup]="adminClubForm">
+          <div class="col-12">
+            <label for="firstname" class="form-label">Firstname</label>
+            <div class="text-danger" *ngIf="adminClubForm.get('firstname')?.invalid && (adminClubForm.get('firstname')?.dirty || adminClubForm.get('firstname')?.touched)"><small style="font-size: 22px">**</small></div>
+            <input formControlName="firstname" id="firstname" type="text" class="form-control" placeholder="Firstname" name="firstname">
+          </div>
+          <div class="col-12">
+            <label for="lastname" class="form-label">Lastname</label>
+            <div class="text-danger" *ngIf="adminClubForm.get('lastname')?.invalid && (adminClubForm.get('lastname')?.dirty || adminClubForm.get('lastname')?.touched)"><small style="font-size: 22px">**</small></div>
+            <input formControlName="lastname" id="lastname" type="text" class="form-control" placeholder="Lastname" name="lastname">
+          </div>
+          <div class="col-12" >
+            <label class="form-label" for="email" >Email</label>
+            <div  *ngIf=" adminClubForm.get('email')?.invalid && (adminClubForm.get('email')?.dirty || adminClubForm.get('email')?.touched)" style="font-size: 22px" class="text-danger"> <small style="font-size: 22px">**</small></div>
+            <div *ngIf=" adminClubForm.get('email')?.errors?.['email']" class="text-danger"> <small >email is not valid</small></div>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="example@mail.com" name="email">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label" for="password">Password</label>
+            <div  *ngIf=" adminClubForm.get('password')?.invalid && (adminClubForm.get('password')?.dirty || adminClubForm.get('password')?.touched)" style="font-size: 22px" class="text-danger"> <small style="font-size: 22px">**</small></div>
+            <div *ngIf=" adminClubForm.get('password')?.errors?.['passwordValidator']" class="text-danger"> <small >password must contain an upper case char </small></div>
+            <input class="form-control" type="password" id="password" formControlName="password" placeholder="Password" name="Password">
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="address">Address</label>
+            <div class="text-danger" *ngIf="adminClubForm.get('address')?.invalid && (adminClubForm.get('address')?.dirty || adminClubForm.get('address')?.touched)"><small style="font-size: 22px">**</small></div>
+            <input class="form-control" type="text" id="address" formControlName="address" placeholder="Address" name="address">
+          </div>
+          <div class="col-12">
+            <label for="club" class="form-label">Select Club</label>
+            <select class="form-select" formControlName="club" id="club">
+              <option value="" disabled selected>Select a club</option>
+              <ng-container *ngIf="clubs.length > 0; else notFound">
+                <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}</option>
+              </ng-container>
+            </select>
+            <ng-template #notFound>
+              <option disabled>Please add a club before admin</option>
+            </ng-template>
+            <div *ngIf="adminClubForm.get('club')?.invalid && (adminClubForm.get('club')?.dirty || adminClubForm.get('club')?.touched)" class="text-danger">
+              <small style="font-size: 22px">**</small>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 col-12">
+            <button type="submit" class="btn btn-outline-primary"  (click)="saveAdmin()" >
+              <i class="fas fa-save"></i>&nbsp;Save
+            </button>
+            <a routerLink="/admin" class="btn btn-link text-danger">
+              <i class="fas fa-times"></i>&nbsp;Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>

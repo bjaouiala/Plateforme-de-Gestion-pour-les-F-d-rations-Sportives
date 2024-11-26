@@ -6,6 +6,23 @@ spring:
     url: jdbc:postgresql://localhost:5432/gestion_des_federation
   application:
     name: platfromeDeGestionDesFederatioSportives
+  mail:
+    host: localhost
+    port: 1025
+    username: ala
+    password: ala
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connectiontimeout: 500
+        timeout: 3000
+        writetimeout: 5000
+
+
 
   jpa:
     hibernate:
@@ -13,16 +30,21 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-server:
-  port:
+
 
 application:
   security:
     jwt:
       secret-key: yhwdxGYjqMr3qRBFFxF3l7si5Q9PfetGI1TD0t4sl06ksSdvyhgLss8YL066tJsZ
       expiration : 8640000
+  mail:
+    activation-url: http://localhost/4200/activation-account
+    login-url: http://localhost/4200/login
+  file:
+    upload:
+      photos-output-path: ./uploads
 
 

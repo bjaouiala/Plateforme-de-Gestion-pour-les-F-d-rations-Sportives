@@ -1,0 +1,67 @@
+<div class="dropdown " style="margin-left: 160vh"  [class.show]="isDropdwon">
+  <button class="btn btn-secondary dropdown-toggle" type="button" (click)="isDropdwon = !isDropdwon">
+    Event Filter
+  </button>
+  <div class="dropdown-menu" style="cursor: pointer" [class.show]="isDropdwon">
+    <a class="dropdown-item" (click)="getAllEvent()">All Event</a>
+    <a class="dropdown-item" (click)="getEventByStatus(Status.Pending)">Pending Event</a>
+    <a class="dropdown-item" (click)="getEventByStatus(Status.CANCELED)">Canceled Event</a>
+    <a class="dropdown-item" (click)="getEventByStatus(Status.FINISHED)">Finished Event</a>
+  </div>
+</div>
+<table class="table">
+  <thead>
+  <th scope="col">#</th>
+  <th scope="col">name</th>
+  <th scope="col">Start Date</th>
+  <th scope="col">End Date</th>
+  <th scope="col">created By</th>
+  <th scope="col">Location</th>
+  <th scope="col">status</th>
+  <th scope="col"><i class="fas fa-cogs"></i> </th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let event of eventPageResponse.content let index =index">
+    <th scope="row">{{index+1}}</th>
+    <td>{{event.name}}</td>
+    <td>{{event.startDate}}</td>
+    <td>{{event.endDate}}</td>
+    <td>{{event.createdBy}}</td>
+    <td>{{event.location}}</td>
+    <td>{{event.status}}</td>
+    <td ><a [routerLink]="['/admin/manage-event', event.id]"><i class="fa-solid fa-pen-to-square"></i></a></td>
+  </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center mt-3">
+  <nav aria-label="page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" (click)="goToFirstPage()" [class.disabled]="page==0" aria-label="previous">
+          <i class="fa-solid fa-angles-left"></i>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)"  (click)="previous()" [class.disabled]="page==0" aria-label="previous">
+          <i class="fa-solid fa-angle-left"></i>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let _ of [].constructor(eventPageResponse.totalPages); let pageIndex=index" >
+        <a class="page-link" href="javascript:void(0)" (click)="goToPage(pageIndex)" [class.active]="page==pageIndex">
+          <i class="fa-solid"></i>{{pageIndex+1}}
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" (click)="next()" [class.disabled]="isLast()" aria-label="next">
+          <i class="fas fa-angle-right"></i>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" (click)="goToLastPage()" [class.disabled]="isLast()" aria-label="next">
+          <i class="fas fa-angles-right"></i>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</div>

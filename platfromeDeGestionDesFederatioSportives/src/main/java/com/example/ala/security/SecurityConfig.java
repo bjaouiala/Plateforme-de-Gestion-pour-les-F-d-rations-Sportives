@@ -21,11 +21,17 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final JwtFilter jwtFilter;
+
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req-> req.requestMatchers("").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(req-> req.requestMatchers(
+                        "/auth/**",
+                        "/sports/**"
+                        ).permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

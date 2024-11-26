@@ -1,0 +1,54 @@
+<div class="p-2">
+  <h2>Manage Admin Clubs</h2>
+  <hr>
+  <div class="d-flex gap-2">
+    <div class="col-3">
+      <img class="rounded-1" width="100%" height="80%" [src]="selectedPicture" alt="...">
+      <div class="mt-2"></div>
+      <input (change)="onFileSelected($event)" class="form-control" type="file" id="formFile" accept="image/*">
+    </div>
+    <div class="col-9">
+      <form class="row g-3" [formGroup]="clubForm" (ngSubmit)="saveClub()">
+        <div class="col-12">
+          <label for="name" class="form-label">Club name</label>
+          <div *ngIf="clubForm.get('name')?.invalid && (clubForm.get('name')?.dirty || clubForm.get('name')?.touched)" class="text-danger"><small style="font-size: 22px">**</small></div>
+          <input  formControlName="name"  id="name" type="text" class="form-control" placeholder="Club name" name="name" required>
+        </div>
+        <div class="col-12">
+
+          <label class="form-label" for="email">Club email</label>
+          <div  *ngIf=" clubForm.get('email')?.invalid && (clubForm.get('email')?.dirty || clubForm.get('email')?.touched)" style="font-size: 22px" class="text-danger"> <small style="font-size: 22px">**</small></div>
+          <div *ngIf=" clubForm.get('email')?.errors?.['email']" class="text-danger"> <small >club email is not valid</small></div>
+
+
+          <input  type="email" class="form-control" id="email" formControlName="email" placeholder="Club email" name="email" required>
+
+        </div>
+        <div class="col-12">
+          <label class="form-label" for="address">Address</label>
+          <div *ngIf="clubForm.get('address')?.invalid && (clubForm.get('address')?.dirty || clubForm.get('address')?.touched)" class="text-danger"><small style="font-size: 22px">**</small></div>
+          <input formControlName="address" class="form-control" type="text" id="address"  placeholder="Club address" name="address" required>
+        </div>
+        <div class="col-12">
+
+          <label class="form-label" for="number">Phone Number</label>
+          <div *ngIf="clubForm.get('phoneNumber')?.invalid && (clubForm.get('phoneNumber')?.dirty || clubForm.get('phoneNumber')?.touched)" class="text-danger"><small style="font-size: 22px">**</small></div>
+          <input formControlName="phoneNumber" [(ngModel)]="club.phoneNumber" class="form-control" type="text" id="number" name="number" placeholder="Phone number" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label" for="description">Club description</label>
+          <div  *ngIf="clubForm.get('description')?.invalid && (clubForm.get('description')?.dirty || clubForm.get('description')?.touched)" class="text-danger"> <small style="font-size: 22px">**</small></div>
+          <textarea  class="form-control" rows="4" id="description" formControlName="description" placeholder="Club description" name="description" required></textarea>
+        </div>
+        <div class="d-flex justify-content-end gap-2 col-12">
+          <button type="submit" class="btn btn-outline-primary" >
+            <i class="fas fa-save"></i>&nbsp;Save
+          </button>
+          <a routerLink="/admin" class="btn btn-link text-danger">
+            <i class="fas fa-times"></i>&nbsp;Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

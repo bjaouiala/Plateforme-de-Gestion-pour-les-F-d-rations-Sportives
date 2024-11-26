@@ -1,0 +1,47 @@
+<div class="p-2">
+  <h2>Manage Events</h2>
+  <hr>
+  <div class="d-flex gap-2">
+    <div class="col-3">
+      <img class="rounded-1" width="100%" height="80%" [src]="selectedPicture" alt="...">
+      <div class="mt-2"></div>
+      <input (change)="onFileSelected($event)" class="form-control" type="file" id="formFile" accept="image/*">
+    </div>
+    <div class="col-9">
+      <form class="row g-3" >
+        <div class="col-12">
+          <label for="name" class="form-label">Event name</label>
+          <input  [(ngModel)]="eventRequest.name"  id="name" type="text" class="form-control" placeholder="Event name" name="name" required>
+        </div>
+        <div class="col-12">
+
+          <label class="form-label" for="startDate">Start Date</label>
+          <input  type="date" class="form-control" id="startDate" [(ngModel)]="eventRequest.startDate" placeholder="Start Date" name="email" required>
+
+        </div>
+        <div class="col-12">
+          <label class="form-label" for="endDate">End Date</label>
+
+          <input [(ngModel)]="eventRequest.endDate" class="form-control" type="date" id="endDate"  placeholder="End Date" name="address" required>
+        </div>
+        <div class="col-12">
+
+          <label class="form-label" for="location">Location</label>
+          <input  [(ngModel)]="eventRequest.location" class="form-control" type="text" id="location" name="number" placeholder="Location" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label" for="description">Event description</label>
+          <textarea [(ngModel)]="eventRequest.description"  class="form-control" rows="4" id="description"  placeholder="Event description" name="description" required></textarea>
+        </div>
+        <div class="d-flex justify-content-end gap-2 col-12">
+          <button (click)="saveEvent()" type="submit" class="btn btn-outline-primary" >
+            <i class="fas fa-save"></i>&nbsp;Save
+          </button>
+          <a routerLink="/admin" class="btn btn-link text-danger">
+            <i class="fas fa-times"></i>&nbsp;Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

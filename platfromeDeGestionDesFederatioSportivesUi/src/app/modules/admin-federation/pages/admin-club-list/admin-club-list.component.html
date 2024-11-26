@@ -1,0 +1,64 @@
+<table class="table">
+    <thead>
+    <th scope="col">#</th>
+    <th scope="col">Firstname</th>
+    <th scope="col">Lastname</th>
+    <th scope="col">email</th>
+    <th scope="col">address</th>
+    <th scope="col">Account Status</th>
+    <th scope="col"><i class="fas fa-cogs"></i> </th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of adminClubPageResponse.content let index =index">
+      <th scope="row">{{index+1}}</th>
+      <td>{{user.firstname}}</td>
+      <td>{{user.lastname}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.address}}</td>
+      <td>
+          <div class="d-flex gap-2 " >
+            <i (click)="changeStatus(user.accountLocked,user.id)" *ngIf="!user.accountLocked" class="fa fa-unlock" aria-hidden="true" style="color: green; cursor: pointer;" title="Disable Account"></i>
+            <i  (click)="changeStatus(user.accountLocked,user.id)" *ngIf="user.accountLocked" class="fa-solid fa-lock" style="color: red; cursor: pointer;" title="Enable Account"></i>
+          </div>
+      </td>
+      <td>
+        <div class="d-flex gap-2">
+          <i (click)="redirectToUpdateAdmin(user)" class="fas fa-user-edit" style="cursor: pointer;" title="update user"></i>
+          <i class="fa-solid fa-circle-info" style="cursor: pointer;" title="show user details"></i>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center mt-3">
+    <nav aria-label="page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="javascript:void(0)" (click)="goToFirstPage()" [class.disabled]="page==0" aria-label="previous">
+            <i class="fa-solid fa-angles-left"></i>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="javascript:void(0)"  (click)="previous()" [class.disabled]="page==0" aria-label="previous">
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+        <li class="page-item" *ngFor="let _ of [].constructor(adminClubPageResponse.totalPages); let pageIndex=index" >
+          <a class="page-link" href="javascript:void(0)" (click)="goToPage(pageIndex)" [class.active]="page==pageIndex">
+            <i class="fa-solid"></i>{{pageIndex+1}}
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="javascript:void(0)" (click)="next()" [class.disabled]="isLast()" aria-label="next">
+            <i class="fas fa-angle-right"></i>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="javascript:void(0)" (click)="goToLastPage()" [class.disabled]="isLast()" aria-label="next">
+            <i class="fas fa-angles-right"></i>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>

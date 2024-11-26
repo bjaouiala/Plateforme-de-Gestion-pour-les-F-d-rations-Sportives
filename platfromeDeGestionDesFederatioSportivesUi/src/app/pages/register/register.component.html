@@ -1,0 +1,65 @@
+<div class="container-fluid card login-container" style="width: 70vh ; background-color: rgba(128,128,128,0.17)">
+  <h3 class="text-center">Create Account</h3>
+  <hr>
+  <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
+    <p *ngFor="let msg of errorMsg">{{msg}}</p>
+  </div>
+
+  <div class="mb-3">
+    <label for="firstname" class="form-label">Firstname</label>
+    <input [(ngModel)]="registerRequest.firstname" type="text" class="form-control" id="firstname" placeholder="Firstname">
+  </div>
+  <div class="mb-3">
+    <label for="lastname" class="form-label">Lastname</label>
+    <input [(ngModel)]="registerRequest.lastname" type="text" class="form-control" id="lastname" placeholder="Lastname">
+  </div>
+  <div class="mb-3">
+    <label for="login" class="form-label">Email address</label>
+    <input [(ngModel)]="registerRequest.email" type="email" class="form-control" id="login" placeholder="name@example.com">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input [(ngModel)]="registerRequest.password" type="password" class="form-control" id="password" placeholder="password">
+  </div>
+  <div class="mb-3">
+    <label for="address" class="form-label">Address</label>
+    <input [(ngModel)]="registerRequest.address" type="text" class="form-control" id="address" placeholder="address">
+  </div>
+  <div class="mb-3">
+    <label for="role" class="form-label">Account type</label>
+    <select [(ngModel)]="registerRequest.role" class="form-select" id="role" aria-label="Country select">
+      <option selected>Select your Account type</option>
+      <option [value]=Role.ATHLETE>Athlete</option>
+      <option [value]="Role.LICENCIE">licensed</option>
+      <option [value]="Role.SPECTATEUR">spectator</option>
+    </select>
+  </div>
+  <div class="mb-3" *ngIf="registerRequest.role == Role.ATHLETE || registerRequest.role == Role.LICENCIE">
+    <label for="sportName" class="form-label">Sport</label>
+    <select  [(ngModel)]="registerRequest.sportId" class="form-select" id="sportName" aria-label="Country select">
+      <option [value]="null" selected>Select your Sport</option>
+      <option  *ngFor="let sport of sport.content" [value]=sport.id>{{sport.name}}</option>
+    </select>
+  </div>
+  <div class="mb-3" >
+    <label for="userPicture" class="form-label">Profile Picture</label>
+    <input (change)="onFileChange($event,'userPicture')" type="file" class="form-control" id="userPicture" placeholder="userPicture" >
+  </div>
+  <div class="mb-3" *ngIf="registerRequest.role == Role.ATHLETE" >
+    <label for="document" class="form-label">Document</label>
+    <input (change)="onFileChange($event,'document')" type="file" class="form-control" id="document" placeholder="document">
+  </div>
+
+  <div (click)=" register()" class="justify-content-between mb-3" >
+    <button type="button" class="btn btn-primary">
+      <em class="fas fa-sign-in-alt">&nbsp;Register</em>
+    </button>
+  </div>
+  <div>
+    already have an account?&nbsp;&nbsp;
+    <button (click)="login()" type="button" class="btn btn-link">
+      Sign in
+    </button>
+  </div>
+
+</div>

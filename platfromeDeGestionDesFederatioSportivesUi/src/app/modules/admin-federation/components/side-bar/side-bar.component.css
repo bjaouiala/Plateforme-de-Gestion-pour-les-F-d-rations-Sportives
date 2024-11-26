@@ -1,0 +1,7 @@
+.subItem{
+  color: white;
+  font-size: small;
+}
+.subItem:hover{
+  color: blue;
+}
